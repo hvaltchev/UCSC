@@ -1,0 +1,5 @@
+print('I am entering Python code')
+print('Here is a second line')
+print('When I press Enter, nothing happens')
+print('This is the last line')
+print('Here is another line that I liked to type')
