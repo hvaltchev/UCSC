@@ -82,3 +82,13 @@ print()
 
 
 # Add code here to ask the user questions, and create and show a new Square based on the answers
+
+size = int(input('What is the (integer) size of an edge of a square: '))
+hChar =input('What character to use for the horizontal edges: ')
+vChar = input('What character  to use for the vertical edges: ')
+cChar = input('What character  to use for the corners: ')
+
+oSquare3 = Square(size, hChar, vChar, cChar)
+oSquare3.show()
+print('Size is:', oSquare3.getSize(), " area is:", oSquare3.getArea())
+print()
