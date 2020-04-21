@@ -77,7 +77,6 @@ class Rectangle():
         Use a space (' ') for all characters not on an edge
         '''
         print()
-
         firstLast = str(self.cornerChar) + str(self.hChar) * (self.length - 2) + str(self.cornerChar)
         middle = str(self.vChar) + (' ' * (self.length - 2)) + str(self.vChar)
 
