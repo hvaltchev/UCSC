@@ -60,6 +60,58 @@ class Square():
         ''' Set a new corner character '''
         self.cornerChar = newCornerChar
 
+
+class Rectangle():
+    """Represents a rectangle
+    """
+
+    def __init__(self, size, hChar, vChar, cornerChar):
+        ''' Initializes a square
+     in the size, the character to used for the horizontal edge, vertical edge, and corners.
+        '''
+        self.size = size
+        self.hChar = hChar
+        self.vChar = vChar
+        self.cornerChar = cornerChar
+
+    def show(self):
+        ''' Print the square in text using the horizontal edge, vertical edge, and corner characters
+        Use a space (' ') for all characters not on an edge
+        '''
+        print()
+
+        firstLast = str(self.cornerChar) + str(self.hChar) * (self.size - 2) + str(self.cornerChar)
+        middle = str(self.vChar) + (' ' * (self.size - 2)) + str(self.vChar)
+
+        for x in range(0, self.size):
+            if x == 0 or x == self.size - 1:
+                print(firstLast)
+            else:
+                print(middle)
+
+    def getSize(self):
+        ''' Returns the size of an edge of the Square '''
+        return self.size
+
+    def setSize(self, size):
+        self.size = size
+
+    def getArea(self):
+        return self.size * self.size
+
+    def setHorizontalChar(self, newHChar):
+        ''' Set a new horizontal character '''
+        self.hChar = newHChar
+
+    def setVerticalChar(self, newVChar):
+        ''' Set a new vertical character '''
+        self.vChar = newVChar
+
+    def setCornerChar(self, newCornerChar):
+        ''' Set a new corner character '''
+        self.cornerChar = newCornerChar
+
+
 # Test code
 # Create a square of size 5
 oSquare1 = Square(5, '-', '|', '*')  # in size, horizonal, vertical, and edge characters
@@ -80,9 +132,7 @@ oSquare1.show()
 print('Size is:', oSquare1.getSize(), " area is:", oSquare1.getArea())
 print()
 
-
 # Add code here to ask the user questions, and create and show a new Square based on the answers
-
 size = int(input('What is the (integer) size of an edge of a square: '))
 hChar =input('What character to use for the horizontal edges: ')
 vChar = input('What character  to use for the vertical edges: ')
