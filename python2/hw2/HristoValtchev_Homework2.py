@@ -13,7 +13,6 @@
 class Square():
     """Represents a square
     """
-
     def __init__(self, size, hChar, vChar, cornerChar):
         ''' Initializes a square
      in the size, the character to used for the horizontal edge, vertical edge, and corners.
@@ -60,11 +59,9 @@ class Square():
         ''' Set a new corner character '''
         self.cornerChar = newCornerChar
 
-
 class Rectangle():
     """Represents a rectangle
     """
-
     def __init__(self, length, width, hChar, vChar, cornerChar):
         ''' Initializes a rectangle
      in the size, the character to used for the horizontal edge, vertical edge, and corners.
@@ -121,7 +118,6 @@ class Rectangle():
     def setCornerChar(self, newCornerChar):
         ''' Set a new corner character '''
         self.cornerChar = newCornerChar
-
 
 # Test code
 # Create a square of size 5
