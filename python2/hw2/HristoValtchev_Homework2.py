@@ -28,16 +28,17 @@ class Square():
         Use a space (' ') for all characters not on an edge
         '''       
         print()
-        print('This line should be replaced with lines to draw this Square.')
 
-        for x in range(0, self.size - 1):
-            for y in range(0, self.size - 1):
-                if (x or y) == 0:
-                    print(self.cornerChar)
-                if (x or y) == self.size - 1:
-                    print(self.cornerChar)
-                else:
-                    print(self.hChar)
+        firstLast = str(self.cornerChar) + str(self.hChar) * (self.size - 2) + str(self.cornerChar)
+        middle = str(self.vChar) + (' ' * (self.size - 2)) + str(self.vChar)
+
+        for x in range(0, self.size):
+            if x == 0 or x == self.size - 1:
+                print(firstLast)
+            else:
+                print(middle)
+
+
 
     def getSize(self):
         ''' Returns the size of an edge of the Square '''
@@ -69,10 +70,10 @@ oSquare1 = Square(5, '-', '|', '*')  # in size, horizonal, vertical, and edge ch
 oSquare1.show()
 print('Size is:', oSquare1.getSize(), " area is:", oSquare1.getArea())
 
-# # Create another square of size 10
-# oSquare2 = Square(10, '-', '|', '*')
-# oSquare2.show()
-# print('Size is:', oSquare2.getSize(), " area is:", oSquare2.getArea())
+# Create another square of size 10
+oSquare2 = Square(10, '-', '|', '*')
+oSquare2.show()
+print('Size is:', oSquare2.getSize(), " area is:", oSquare2.getArea())
 
 # # Tell the first square to modify its data
 # oSquare1.setSize(7)
