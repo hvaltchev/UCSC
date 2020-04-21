@@ -1,3 +1,12 @@
+#-----------------------------------------------------------------------------------------------#
+
+# Hristo Valtchev
+# Homework #1 BONUS
+# 4/20/2020
+# Bank Account
+#-----------------------------------------------------------------------------------------------#
+
+
 # Account class
 #   This is not an account.
 #   Instead, this is a blueprint (for a bank account)
@@ -11,13 +20,14 @@ class Account:
         self.name = name
         self.balance = float(balance)
         self.password = password
+        self.interestCount = 0
    
     def show(self):
         # Call this to write out details of account
         print('Account')
-        print('       Name', self.name)
-        print('       Balance:', self.balance)
-        print('       Password:', self.password)
+        print('Name', self.name)
+        print('Balance:', self.balance)
+        print('Password:', self.password)
         print()
 
     def getBalance(self, password):
@@ -42,7 +52,7 @@ class Account:
         return self.balance
         
     def withdraw(self, amountToWithdraw, password):
-        # Call this to make a withdrawl
+        # Call this to make a withdraw
         if amountToWithdraw < 0:
             print('You cannot withdraw a negative amount')
             return -1
@@ -59,14 +69,27 @@ class Account:
         return self.balance
 
     # Add "addInterest" method here
+    def addInterest(self):
+        # Counter for number of times addInterest has been called
+        self.interestCount += 1
 
+        if self.interestCount < 2:
+            if self.balance < 1000:
+                self.balance = self.balance * 1.01
+            elif self.balance < 5000:
+                self.balance = self.balance * 1.015
+            else:
+                self.balance = self.balance * 1.02
+        # If counter is > 1 don't calculate interest
+        else:
+            return self.balance
 
 # Test code
 # First, create an account
-oAccount = Account('Joe Schmoe', 1200.00, 'myPassword')
-print(oAccount.getBalance('myPassword')) # should show starting balance
+oAccount = Account('Joe Schmoe', 1200, 'myPassword')
+print(oAccount.getBalance('myPassword'))    # should show starting balance
 oAccount.addInterest()
-print(oAccount.getBalance('myPassword')) # should show balance with interest
+print(oAccount.getBalance('myPassword'))    # should show balance with interest
 oAccount.addInterest()
 print(oAccount.getBalance('myPassword'))    # output should *not* change
 oAccount.addInterest()
