@@ -38,8 +38,6 @@ class Square():
             else:
                 print(middle)
 
-
-
     def getSize(self):
         ''' Returns the size of an edge of the Square '''
         return self.size
@@ -53,12 +51,10 @@ class Square():
     def setHorizontalChar(self, newHChar):
         ''' Set a new horizontal character '''
         self.hChar = newHChar
-
         
     def setVerticalChar(self, newVChar):
         ''' Set a new vertical character '''
         self.vChar = newVChar
-
 
     def setCornerChar(self, newCornerChar):
         ''' Set a new corner character '''
@@ -75,14 +71,14 @@ oSquare2 = Square(10, '-', '|', '*')
 oSquare2.show()
 print('Size is:', oSquare2.getSize(), " area is:", oSquare2.getArea())
 
-# # Tell the first square to modify its data
-# oSquare1.setSize(7)
-# oSquare1.setHorizontalChar('^')
-# oSquare1.setVerticalChar('?')
-# oSquare1.setCornerChar('$')
-# oSquare1.show()
-# print('Size is:', oSquare1.getSize(), " area is:", oSquare1.getArea())
-# print()
+# Tell the first square to modify its data
+oSquare1.setSize(7)
+oSquare1.setHorizontalChar('^')
+oSquare1.setVerticalChar('?')
+oSquare1.setCornerChar('$')
+oSquare1.show()
+print('Size is:', oSquare1.getSize(), " area is:", oSquare1.getArea())
+print()
 
 
 # Add code here to ask the user questions, and create and show a new Square based on the answers
