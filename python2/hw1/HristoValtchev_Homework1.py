@@ -3,11 +3,9 @@
 # Hristo Valtchev
 # Homework #1
 # 4/20/2020
-
+# HigherOrLower
 #-----------------------------------------------------------------------------------------------#
 
-
-#  HigherOrLower
 
 import random
 
@@ -91,8 +89,6 @@ while True:  # play multiple games
             # Compare rank based on index of SUIT_TUPLE
             curRank = SUIT_TUPLE.index(currentCardSuit)
             nextRank = SUIT_TUPLE.index(nextCardSuit)
-            print(curRank)
-            print(nextRank)
 
             if userAnswer == 'l':
                 if nextRank < curRank:
