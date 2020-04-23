@@ -13,53 +13,39 @@ DATA_FILE_PATH = 'SlotMachineData.txt'
 from FileReadWrite import *
 import random
 import time
+import json
 
-#init new player
-userName = input('Please enter your name:')
+# User input for username
+userName = input('Please enter your name: ')
 nCoins = 100
 
-#if not fileExists(DATA_FILE_PATH):
-#    #print('You have', nCoins, 'coins to start.  Good luck.')
-#    print('No existing players.')
-#else:
-myFileData = readFile(DATA_FILE_PATH)
-print(myFileData)
-    
-myFileList = myFileData.split(',')
-print(myFileList)
-    
-    #search list for name and assign name and score to nCoins and userName
-    #player already existis
+# Create a dictionary which stores player name and score
+playerDict = {userName: nCoins}
 
-print(myFileList.count(userName))
-if myFileList.count(userName) == 1:
-    print('Existing Player')
-    index = myFileList.index(userName)
-    print(index)
-    score = myFileList[index - 1]
-    print(score)
-    nCoins = int(score)
-    userName = myFileList[index]
-    print('Welcome back', userName)
-    print('Your previous score was:', nCoins)
-    #player is new
-#else:
-#        print('New Player') 
-print()
+# Check if file exists
+if True == fileExists(DATA_FILE_PATH):
+    print('Existing File')
+    # Open File for Reading
+    handle = openFileForReading(DATA_FILE_PATH)
+    line = readALine(handle)
+    playerDict = line
+    # Populate nCoins
+    # print(line)
+    try:
+        nCoins = line[userName]
+    except:
+        playerDict.update({userName: nCoins})
+        print(playerDict)
+elif False == fileExists(DATA_FILE_PATH):
+    print('Create a new File')
+    handle = openFileForWriting(DATA_FILE_PATH)
+    handle.close()
 
 #initialize reel
 reelList = ['orange', 'orange', 'orange', 'lemon', 'lemon', 'lemon', 
               'plum', 'plum', 'plum', 'cherries', 'cherries', 'cherries',
               'banana', 'banana', 'banana', 'bar', 'bar', 'Lucky 7']
 nPicturesInReel = len(reelList)
-
-#initial number of coins
-#nCoins = 100
-
-#Game is being initialized
-#print()
-#print('You have', nCoins, 'coins to start.  Good luck.')
-#print()
 
 def payTable(myList):
     picture1 = myList[0]
@@ -72,54 +58,31 @@ def payTable(myList):
             nCoinsWon = 100
         else:
             nCoinsWon = 10
-
     else:
         if (picture1 == picture2) or (picture1 == picture3) or (picture2 == picture3):
             nCoinsWon = 2
         else:
             nCoinsWon = 0
-
     return nCoinsWon
-        
 
 while True:
+    bet = int(input('How many coins do you want to bet (defaults to 1, enter 0 to quit): '))
 
-    bet = input('How many coins do you want to bet (defaults to 1, enter 0 to quit): ')
+    if bet == 0:
+        break
 
-    #check for enter 
+    # Check for enter
     if bet == '':
         bet = 1
-    
-    #check for int
-    try:
-        bet = int(bet)
-        #exit condition
-        if bet == 0:
-            #save name and score to a file
-            print('TIME TO WRITE TO A FILE')
-            #prep line to write
-            writeString = str(nCoins) + ',' + userName + ','  
-            #check if it exits
-            #------------------#
-                
 
-            #write to file
-            writeFile(DATA_FILE_PATH, writeString)
-
-            break
+    # Negative number
+    if bet < 0:
+        print('Invalid input negative number.')
+        continue
         
-        #negative number
-        if bet < 0:
-            print('Invalid input negative number.')
-            continue
-        
-        #check for enough coins 
-        if bet > nCoins:
-            print('Sorry, you do not have that many coins, you only have:', nCoins)
-            continue
-
-    except ValueError:
-        print('Invalid input. You entered a invalid number or string.')
+    # Check for enough coins
+    if bet > nCoins:
+        print('Sorry, you do not have that many coins, you only have:', nCoins)
         continue
 
     resultList = []
@@ -131,28 +94,34 @@ while True:
     print( 'Spinning ... ')
     print()
     time.sleep(.5)
-    print( '     ', resultList[0])
+    print('     ', resultList[0])
     time.sleep(.5)
-    print( '     ', resultList[1])
+    print('     ', resultList[1])
     time.sleep(.5)
-    print( '     ', resultList[2])
-    print( )
+    print('     ', resultList[2])
+    print()
         
     nCoins = nCoins - bet
 
     payOut = bet * payTable(resultList)
     
-    if payOut  == 0:
-        print( 'Sorry - you lose.')
+    if payOut == 0:
+        print('Sorry - you lose.')
     else:
-        print( 'You won', payOut, 'coins. Cha-ching!')
+        print('You won', payOut, 'coins. Cha-ching!')
         if payOut > 50:
-            print( 'WOOOOO HOOOOOOOOOOO!!!!')
+            print('WOOOOO HOOOOOOOOOOO!!!!')
             
     nCoins = nCoins + payOut
 
-    print( 'You now have', nCoins, 'coins.')
+    print('You now have', nCoins, 'coins.')
     print()
 
-print( 'Sorry to see you go. Come back again soon.')
-    
+print(userName, 'sorry to see you go. You currently have', nCoins, 'coins.')
+playerDict[userName] = nCoins
+
+# Cleanup
+print(playerDict)
+handle = openFileForWriting(DATA_FILE_PATH)
+json.dump(playerDict, handle)
+handle.close()

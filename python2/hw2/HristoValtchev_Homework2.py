@@ -14,9 +14,7 @@ class Square():
     """Represents a square
     """
     def __init__(self, size, hChar, vChar, cornerChar):
-        ''' Initializes a square
-     in the size, the character to used for the horizontal edge, vertical edge, and corners.
-        '''
+        ''' Initializes a square in the size, the character to used for the horizontal edge, vertical edge, and corners.'''
         self.size = size
         self.hChar = hChar
         self.vChar = vChar
