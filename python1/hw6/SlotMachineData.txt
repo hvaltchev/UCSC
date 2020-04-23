@@ -1,1 +1,1 @@
-{"Nadia": 97}
+{"Taylor Swift": 100, "Turbo": 71, "Hristo": 99, "Nadia": 108}

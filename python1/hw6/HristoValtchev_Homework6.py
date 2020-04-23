@@ -11,6 +11,7 @@
 DATA_FILE_PATH = 'SlotMachineData.txt'
 
 from FileReadWrite import *
+import os
 import random
 import time
 import json
@@ -25,17 +26,17 @@ playerDict = {userName: nCoins}
 # Check if file exists
 if True == fileExists(DATA_FILE_PATH):
     print('Existing File')
-    # Open File for Reading
-    handle = openFileForReading(DATA_FILE_PATH)
-    line = readALine(handle)
-    playerDict = line
-    # Populate nCoins
-    # print(line)
-    try:
-        nCoins = line[userName]
-    except:
-        playerDict.update({userName: nCoins})
-        print(playerDict)
+
+    if os.path.getsize(DATA_FILE_PATH) != 0:
+        # Open File for Reading
+        handle = openFileForReading(DATA_FILE_PATH)
+        # line = readALine(handle)
+        line = json.load(handle)
+        playerDict.update(line)
+    else:
+        handle = openFileForWriting(DATA_FILE_PATH)
+        json.dump(playerDict, handle)
+        handle.close()
 elif False == fileExists(DATA_FILE_PATH):
     print('Create a new File')
     handle = openFileForWriting(DATA_FILE_PATH)
@@ -66,14 +67,16 @@ def payTable(myList):
     return nCoinsWon
 
 while True:
-    bet = int(input('How many coins do you want to bet (defaults to 1, enter 0 to quit): '))
-
-    if bet == 0:
-        break
+    bet = input('How many coins do you want to bet (defaults to 1, enter 0 to quit): ')
 
     # Check for enter
     if bet == '':
         bet = 1
+
+    bet = int(bet)
+
+    if bet == 0:
+        break
 
     # Negative number
     if bet < 0:
