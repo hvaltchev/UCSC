@@ -11,6 +11,7 @@
 DATA_FILE_PATH = 'SlotMachineData.txt'
 
 from FileReadWrite import *
+import os
 import random
 import time
 import json
@@ -18,24 +19,22 @@ import json
 # User input for username
 userName = input('Please enter your name: ')
 nCoins = 100
-
 # Create a dictionary which stores player name and score
 playerDict = {userName: nCoins}
 
 # Check if file exists
 if True == fileExists(DATA_FILE_PATH):
-    print('Existing File')
-    # Open File for Reading
-    handle = openFileForReading(DATA_FILE_PATH)
-    line = readALine(handle)
-    playerDict = line
-    # Populate nCoins
-    # print(line)
-    try:
-        nCoins = line[userName]
-    except:
-        playerDict.update({userName: nCoins})
-        print(playerDict)
+    if os.path.getsize(DATA_FILE_PATH) != 0:
+        # Open File for Reading
+        handle = openFileForReading(DATA_FILE_PATH)
+        # line = readALine(handle)
+        line = json.load(handle)
+        playerDict.update(line)
+        print(userName, 'you currently have', playerDict[userName], 'coins.\n')
+    else:
+        handle = openFileForWriting(DATA_FILE_PATH)
+        json.dump(playerDict, handle)
+        handle.close()
 elif False == fileExists(DATA_FILE_PATH):
     print('Create a new File')
     handle = openFileForWriting(DATA_FILE_PATH)
@@ -66,20 +65,18 @@ def payTable(myList):
     return nCoinsWon
 
 while True:
-    bet = int(input('How many coins do you want to bet (defaults to 1, enter 0 to quit): '))
-
-    if bet == 0:
-        break
+    bet = input('How many coins do you want to bet (defaults to 1, enter 0 to quit): ')
 
     # Check for enter
     if bet == '':
         bet = 1
-
+    bet = int(bet)
+    if bet == 0:
+        break
     # Negative number
     if bet < 0:
         print('Invalid input negative number.')
         continue
-        
     # Check for enough coins
     if bet > nCoins:
         print('Sorry, you do not have that many coins, you only have:', nCoins)
@@ -91,7 +88,7 @@ while True:
         thisPicture = reelList[thisReelIndex]
         resultList.append(thisPicture)
 
-    print( 'Spinning ... ')
+    print('Spinning ... ')
     print()
     time.sleep(.5)
     print('     ', resultList[0])
@@ -100,28 +97,21 @@ while True:
     time.sleep(.5)
     print('     ', resultList[2])
     print()
-        
     nCoins = nCoins - bet
-
     payOut = bet * payTable(resultList)
-    
+
     if payOut == 0:
         print('Sorry - you lose.')
     else:
         print('You won', payOut, 'coins. Cha-ching!')
         if payOut > 50:
             print('WOOOOO HOOOOOOOOOOO!!!!')
-            
     nCoins = nCoins + payOut
-
-    print('You now have', nCoins, 'coins.')
-    print()
-
+    print('You now have', nCoins, 'coins.\n')
 print(userName, 'sorry to see you go. You currently have', nCoins, 'coins.')
-playerDict[userName] = nCoins
 
 # Cleanup
-print(playerDict)
+playerDict[userName] = nCoins
 handle = openFileForWriting(DATA_FILE_PATH)
 json.dump(playerDict, handle)
 handle.close()
