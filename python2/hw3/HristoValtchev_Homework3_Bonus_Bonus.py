@@ -9,6 +9,7 @@
 # Dice - count totals in user-defined number of rounds
 
 import random
+import math
 
 class Bin():
     def __init__(self, binIdentifier):
@@ -27,7 +28,12 @@ class Bin():
     def show(self, nRoundsDone):
         # Called at the end to show the contents of this bin
         if self.binIndentifier > 1:
-            print(self.binIndentifier, ': count is', self.count, 'or', '{:.0%}'.format(self.count/nRoundsDone))
+            percent = math.floor((self.count / nRoundsDone) * 100)
+            # print(self.binIndentifier, ': count is', self.count, 'or', '{:.0%}'.format(self.count / nRoundsDone))
+            print(self.binIndentifier, ':', '*' * percent, '{:.0%}'.format(self.count / nRoundsDone), '(', self.count, ')')
+
+
+            # print('-' * percent)
 
 # Build a list of Bin objects            
 binList = []  # start off as the empty list
