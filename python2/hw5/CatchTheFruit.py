@@ -11,7 +11,7 @@ import pygwidgets
 
 # 2 - Define constants
 BLACK = (0, 0, 0)
-LIME = (0, 255,0)
+LIME = (0, 255, 0)
 WHITE = (255, 255, 255)
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 500
@@ -27,13 +27,9 @@ oDisplay = pygwidgets.DisplayText(window, (WINDOW_WIDTH -120, 10), '', fontSize=
 
 # 5 - Initialize variables
 oBasket = Basket(window, WINDOW_WIDTH, WINDOW_HEIGHT)
-
 oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, 'apple')
-
 oRestartButton = pygwidgets.TextButton(window, (5, 5), 'Restart')
-
 score = 0
-
 
 # 6 - Loop forever
 while True:
@@ -47,7 +43,17 @@ while True:
         if oRestartButton.handleEvent(event):  # ckicked on the Restart button
             print('User pressed the Restart button')
 
-    # Add "continuous mode" code here to check for left or right arrow keys
+        # Check for user pressing keys
+        keyPressedList = pygame.key.get_pressed()
+        if keyPressedList[pygame.K_LEFT]:  # moving left
+            print('LEFT')
+            oBasket.move('left')
+
+        if keyPressedList[pygame.K_RIGHT]:  # moving right
+            print('RIGHT')
+            oBasket.move('right')
+
+   # Add "continuous mode" code here to check for left or right arrow keys
     # If you get one, tell the basket to move itself appropriately
 
     # 8 - Do any "per frame" actions
@@ -58,6 +64,7 @@ while True:
     fruitRect = oFruit.getRect()
     if basketRect.colliderect(fruitRect):
         print('Fruit has collided with the basket')
+        score = score + 15
 
     oDisplay.setValue('Score:' + str(score))
 

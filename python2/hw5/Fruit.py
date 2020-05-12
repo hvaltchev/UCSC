@@ -3,7 +3,6 @@ from pygame.locals import *
 import random
 import pygwidgets
 
-
 # Fruit class
 class Fruit():
 
@@ -38,7 +37,6 @@ class Fruit():
         # move location
         self.y = self.y + self.ySpeed
         self.image.setLoc((self.x, self.y))
-
 
     def getRect(self):
         myRect = pygame.Rect(self.x, self.y, self.width, self.height)
