@@ -42,6 +42,7 @@ while True:
 
         if oRestartButton.handleEvent(event):  # ckicked on the Restart button
             print('User pressed the Restart button')
+            score = 0
 
         # Check for user pressing keys
         keyPressedList = pygame.key.get_pressed()
@@ -62,9 +63,10 @@ while True:
     basketRect = oBasket.getRect()
 
     fruitRect = oFruit.getRect()
+
     if basketRect.colliderect(fruitRect):
         print('Fruit has collided with the basket')
-        score = score + 15
+        score = oFruit.points
 
     oDisplay.setValue('Score:' + str(score))
 
