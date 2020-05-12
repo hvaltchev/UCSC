@@ -1,0 +1,55 @@
+import pygame
+from pygame.locals import *
+import random
+
+# BALL CLASS 
+class Ball():
+
+    def __init__(self, window, windowWidth, windowHeight):
+        self.window = window  # remember the window, so we can draw later
+        self.windowWidth = windowWidth
+        self.windowHeight = windowHeight
+
+        self.ballImage = pygame.image.load("images/ball.png")
+        # A rect is made up of [x, y, width, height]
+        ballRect = self.ballImage.get_rect()
+        self.width = ballRect[2]
+        self.height = ballRect[3]
+        self.maxWidth = windowWidth - self.width
+        self.maxHeight = windowHeight - self.height
+        
+        # Pick a random starting position 
+        self.x = random.randrange(0, self.maxWidth)
+        self.y = random.randrange(0, self.maxHeight)
+
+        # Choose a random speed in both the x and y directions
+        self.xSpeed = random.randrange(-3, 3)
+        self.ySpeed = random.randrange(-3, 3)
+
+        while self.xSpeed == 0:
+            self.xSpeed = random.randrange(-3, 3)
+
+        while self.ySpeed == 0:
+            self.ySpeed = random.randrange(-3, 3)
+
+    def update(self, reverse):
+        # check for hitting a wall.  If so, change that direction
+        if self.xSpeed != 0 and self.ySpeed != 0:
+            if (self.x < 0) or (self.x > self.maxWidth):
+                self.xSpeed = -self.xSpeed
+
+            if (self.y < 0) or (self.y > self.maxHeight):
+                self.ySpeed = -self.ySpeed
+
+            # update the balls x and y, based on the speed in two directions
+            if reverse == 0:
+                self.x = self.x + self.xSpeed
+                self.y = self.y + self.ySpeed
+            if reverse == 1:
+                self.x = self.x - self.xSpeed
+                self.y = self.y - self.ySpeed
+        else:
+            self.xSpeed = random.randrange(-3, 3)
+            self.ySpeed = random.randrange(-3, 3)
+    def draw(self):
+        self.window.blit(self.ballImage, (self.x, self.y))
