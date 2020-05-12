@@ -26,16 +26,27 @@ clock = pygame.time.Clock()  # set the speed (frames per second)
 oDisplay = pygwidgets.DisplayText(window, (WINDOW_WIDTH -120, 10), '', fontSize=30)
 
 # 5 - Initialize variables
-fruitList = ['apple', 'banana', 'cherry', 'grapes', 'pear', 'strawberry']
+fruitType = ['apple', 'banana', 'cherry', 'grapes', 'pear', 'strawberry']
+fruitList = []
+fruitRectList = []
+r = random.randint(0, 5)
 oBasket = Basket(window, WINDOW_WIDTH, WINDOW_HEIGHT)
-oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitList[1])
+oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
 oRestartButton = pygwidgets.TextButton(window, (5, 5), 'Restart')
 score = 0
 level = 1
 
 # 6 - Loop forever
 while True:
-    
+    r = random.randint(0, 5)
+    oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
+    oFruit.reset()
+    fruitList.append(oFruit)
+    # if pygame.time.get_ticks() % 10 == 1:
+    #     print('TICK')
+    #     oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
+    #     fruitList.append(oFruit)
+
     # 7 - Check for and handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -60,22 +71,32 @@ while True:
     # If you get one, tell the basket to move itself appropriately
 
     # 8 - Do any "per frame" actions
-    oFruit.update()  # tell each fruit to update itself
-
+    # oFruit.update()  # tell each fruit to update itself
     basketRect = oBasket.getRect()
 
-    fruitRect = oFruit.getRect()
+    for x in range(len(fruitList)):
+        fruitList[x].update()
+        fruitRect = fruitList[x].getRect()
+        fruitRectList.append(fruitRect)
 
-    if basketRect.colliderect(fruitRect):
-        print('Fruit has collided with the basket')
-        score = oFruit.getScore()
+    # basketRect = oBasket.getRect()
+
+    # fruitRect = oFruit.getRect()
+    for y in range(len(fruitRectList)):
+        if basketRect.colliderect(fruitRectList[y]):
+            fruitList[y].reset()
+            # fruitList[].update()
+            print('Fruit has collided with the basket')
+            score += oFruit.getScore()
     oDisplay.setValue('Score:' + str(score))
 
     # 9 - Clear the screen before drawing it again
     window.fill(LIME)
     
     # 10 - Draw the screen elements
-    oFruit.draw()   # tell each ball to draw itself
+    for x in range(len(fruitList)):
+        fruitList[x].draw()
+    # oFruit.draw()   # tell each ball to draw itself
 
     oRestartButton.draw()
     oBasket.draw()
