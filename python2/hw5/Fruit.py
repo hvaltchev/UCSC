@@ -6,13 +6,13 @@ import pygwidgets
 # Fruit class
 class Fruit():
 
-    def __init__(self, window, windowWidth, windowHeight, fruitType, points=15):
+    def __init__(self, window, windowWidth, windowHeight, fruitType):
         self.window = window  # remember the window, so we can draw later
         self.windowWidth = windowWidth
         self.windowHeight = windowHeight
-        self.image = pygwidgets.Image(window, (0, 0), 'images/apple.png')
-
-        self.points = points
+        self.fruitType = fruitType
+        self.image = pygwidgets.Image(window, (0, 0), 'images/' + fruitType + '.png')
+        self.points = 15
         # A rect is made up of [x, y, width, height]
         startingRect = self.image.getRect()
         self.width = startingRect[2]
@@ -41,6 +41,13 @@ class Fruit():
     def getRect(self):
         myRect = pygame.Rect(self.x, self.y, self.width, self.height)
         return myRect
+
+    def getScore(self):
+        if self.fruitType != 'pear':
+            self.points = 15
+        else:
+            self.points = -100
+        return self.points
 
     def draw(self):
         self.image.draw()
