@@ -86,6 +86,7 @@ while True:
     for x in range(len(fruitList)):
         fruitList[x].update()
         if basketRect.colliderect(fruitList[x].getRect()):
+            fruitList[x].playSound()
             fruitList[x].reset()
             fruitList[x].update()
             print('Fruit has collided with the basket')

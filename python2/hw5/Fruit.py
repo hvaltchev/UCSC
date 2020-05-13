@@ -51,13 +51,22 @@ class Fruit():
             #play bad sound
         return self.points
 
-    def countFruit(self, ):
+    def countFruit(self):
         pass
 
     def levelUp(self):
-
         pass
 
+    def playSound(self):
+        if self.fruitType != 'pear':
+            #load good sound
+            pygame.mixer.music.load('audio/brick-1.wav')
+            pygame.mixer.music.play()
+        else:
+            self.points = -100
+            #load bad sound
+            pygame.mixer.music.load('audio/brick-2.wav')
+            pygame.mixer.music.play()
     def draw(self):
         self.image.draw()
 
