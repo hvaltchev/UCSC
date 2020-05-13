@@ -31,13 +31,13 @@ score = 0
 level = 1
 fruitType = ['apple', 'banana', 'cherry', 'grapes', 'pear', 'strawberry']
 fruitList = []
-fruitCount = {'apple': 0, 'banana': 0, 'cherry': 0, 'grapes': 0, 'pear': 0, 'strawberry': 0}
+fruitCount = [0, 0, 0, 0, 0, 0]
 r = random.randint(0, 5)
 oBasket = Basket(window, WINDOW_WIDTH, WINDOW_HEIGHT)
 oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
 oRestartButton = pygwidgets.TextButton(window, (5, 5), 'Restart')
-oLevelText1 = pygwidgets.DisplayText(window, (440, 20), 'LEVEL 1')
-oLevelText2 = pygwidgets.DisplayText(window, (460, 20), str(level))
+oLevelText = pygwidgets.DisplayText(window, (440, 20), 'LEVEL 1')
+oCountText = pygwidgets.DisplayText(window, (360, 980), 'apple: 0 banana: 0 cherry: 0 grapes: 0 pear: 0 strawberry: 0')
 
 # 6 - Loop forever
 while True:
@@ -93,14 +93,12 @@ while True:
             #TODO Count each fruit and display at the bottom of the window
             # fruitCount{fruitList[x].fruitType} += 1
             score += fruitList[x].getScore()
-            if score % 100 == 0 and score > 0:
+            # Level Calculation
+            if score % 1000 == 0:
                 level = level + 1
-                print("LEVEL:", level)
+                update = 'LEVEL: ' + str(level)
+                oLevelText.setValue(update)
         oDisplay.setValue('Score:' + str(score))
-        #TODO - ADD LEVEL FUNCTIONARLITY
-        # if score % 500 == 0:
-        #     level = level + 1
-        #     print(level)
     # 9 - Clear the screen before drawing it again
     window.fill(LIME)
     
@@ -112,8 +110,8 @@ while True:
     oRestartButton.draw()
     oBasket.draw()
     oDisplay.draw()
-    oLevelText1.draw()
-    oLevelText2.draw()
+    oLevelText.draw()
+    oCountText.draw()
 
     # 11 - Update the screen
     pygame.display.update()

@@ -33,7 +33,6 @@ class Fruit():
         # check for going off screen, move to above the windows
         if self.y > self.windowHeight:
             self.reset()
-
         # move location
         self.y = self.y + self.ySpeed
         self.image.setLoc((self.x, self.y))
@@ -67,6 +66,7 @@ class Fruit():
             #load bad sound
             pygame.mixer.music.load('audio/brick-2.wav')
             pygame.mixer.music.play()
+
     def draw(self):
         self.image.draw()
 
