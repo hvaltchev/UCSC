@@ -45,9 +45,18 @@ class Fruit():
     def getScore(self):
         if self.fruitType != 'pear':
             self.points = 15
+            #play good sound
         else:
             self.points = -100
+            #play bad sound
         return self.points
+
+    def countFruit(self, ):
+        pass
+
+    def levelUp(self):
+
+        pass
 
     def draw(self):
         self.image.draw()
