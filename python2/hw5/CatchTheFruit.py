@@ -36,7 +36,7 @@ r = random.randint(0, 5)
 oBasket = Basket(window, WINDOW_WIDTH, WINDOW_HEIGHT)
 oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
 oRestartButton = pygwidgets.TextButton(window, (5, 5), 'Restart')
-oLevelText = pygwidgets.DisplayText(window, (440, 20), 'LEVEL 1')
+oLevelText = pygwidgets.DisplayText(window, (460, 20), 'LEVEL 1')
 oCountText = pygwidgets.DisplayText(window, (360, 980), 'apple: 0 banana: 0 cherry: 0 grapes: 0 pear: 0 strawberry: 0')
 
 # 6 - Loop forever
@@ -98,6 +98,9 @@ while True:
                 level = level + 1
                 update = 'LEVEL: ' + str(level)
                 oLevelText.setValue(update)
+            # Check type of fruit
+            # type = index.fruitList[x].fruitType()
+            print(type)
         oDisplay.setValue('Score:' + str(score))
     # 9 - Clear the screen before drawing it again
     window.fill(LIME)
