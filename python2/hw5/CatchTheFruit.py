@@ -32,6 +32,7 @@ level = 1
 fruitType = ['apple', 'banana', 'cherry', 'grapes', 'pear', 'strawberry']
 fruitList = []
 fruitCount = [0, 0, 0, 0, 0, 0]
+fruit = ''
 r = random.randint(0, 5)
 oBasket = Basket(window, WINDOW_WIDTH, WINDOW_HEIGHT)
 oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
@@ -60,6 +61,8 @@ while True:
             score = 0
             window.fill(LIME)
             level = 1
+
+            oCountText.draw()
             for x in range(len(fruitList)):
                 fruitList[x].reset()
 
@@ -99,9 +102,12 @@ while True:
                 update = 'LEVEL: ' + str(level)
                 oLevelText.setValue(update)
             # Check type of fruit
-            # type = index.fruitList[x].fruitType()
-            print(type)
+            fruit = fruitList[x].fruitType
+            fruit = fruitType.index(fruit)
+            fruitCount[fruit] = fruitCount[fruit] + 1
+            print(fruitCount)
         oDisplay.setValue('Score:' + str(score))
+        oCountText.setValue('apple: ' + str(fruitCount[0]) + ' banana: ' + str(fruitCount[1]) + ' cherry: ' + str(fruitCount[2]) + ' grapes: ' + str(fruitCount[3]) + ' pear: ' + str(fruitCount[4]) + ' strawberry: ' + str(fruitCount[5]))
     # 9 - Clear the screen before drawing it again
     window.fill(LIME)
     
