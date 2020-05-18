@@ -35,7 +35,6 @@ class Basket():
 
         if leftOrRight == 'right' and self.x + self.width + self.halfWidth < self.windowWidth:
             self.x = self.x + self.width
-
         self.image.setLoc((self.x, self.y))
 
     def getRect(self):

@@ -43,7 +43,7 @@ oCountText = pygwidgets.DisplayText(window, (360, 980), 'apple: 0 banana: 0 cher
 # 6 - Loop forever
 while True:
     r = random.randint(0, 5)
-    if pygame.time.get_ticks() % 50 == 1 and len(fruitList) < 100:
+    if pygame.time.get_ticks() % 105 == 1 and len(fruitList) < 100:
         print('TICK')
         oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
         fruitList.append(oFruit)
@@ -61,9 +61,11 @@ while True:
             window.fill(LIME)
             score = 0
             level = 1
+            oLevelText = pygwidgets.DisplayText(window, (460, 20), 'LEVEL 1')
+            oLevelText.draw()
             fruitCount = [0, 0, 0, 0, 0, 0]
             for x in range(len(fruitList)):
-                fruitList[x].reset()
+                fruitList[x].update()
 
         # Check for user pressing left key
         keyPressedList = pygame.key.get_pressed()
@@ -91,10 +93,9 @@ while True:
             print('Fruit has collided with the basket')
             fruitList[x].playSound()
             fruitList[x].reset()
-            fruitList[x].update()
             score = score + fruitList[x].getScore()
             # Level Calculation
-            if score % 1000 == 0 and score > 0:
+            if score > 0 and score % 525 == 0:
                 level = level + 1
                 update = 'LEVEL: ' + str(level)
                 oLevelText.setValue(update)
