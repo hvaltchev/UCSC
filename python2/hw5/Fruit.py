@@ -50,11 +50,8 @@ class Fruit():
             #play bad sound
         return self.points
 
-    def countFruit(self):
-        pass
-
     def levelUp(self):
-        pass
+        self.ySpeed = self.ySpeed * 2
 
     def playSound(self):
         if self.fruitType != 'pear':

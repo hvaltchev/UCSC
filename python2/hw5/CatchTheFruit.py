@@ -43,7 +43,7 @@ oCountText = pygwidgets.DisplayText(window, (360, 980), 'apple: 0 banana: 0 cher
 # 6 - Loop forever
 while True:
     r = random.randint(0, 5)
-    if pygame.time.get_ticks() % 50 == 1:
+    if pygame.time.get_ticks() % 50 == 1 and len(fruitList) < 100:
         print('TICK')
         oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType[r])
         fruitList.append(oFruit)
@@ -58,11 +58,10 @@ while True:
         # Restart Button
         if oRestartButton.handleEvent(event):  # ckicked on the Restart button
             print('User pressed the Restart button')
-            score = 0
             window.fill(LIME)
+            score = 0
             level = 1
-
-            oCountText.draw()
+            fruitCount = [0, 0, 0, 0, 0, 0]
             for x in range(len(fruitList)):
                 fruitList[x].reset()
 
@@ -89,18 +88,19 @@ while True:
     for x in range(len(fruitList)):
         fruitList[x].update()
         if basketRect.colliderect(fruitList[x].getRect()):
+            print('Fruit has collided with the basket')
             fruitList[x].playSound()
             fruitList[x].reset()
             fruitList[x].update()
-            print('Fruit has collided with the basket')
-            #TODO Count each fruit and display at the bottom of the window
-            # fruitCount{fruitList[x].fruitType} += 1
-            score += fruitList[x].getScore()
+            score = score + fruitList[x].getScore()
             # Level Calculation
-            if score % 1000 == 0:
+            if score % 1000 == 0 and score > 0:
                 level = level + 1
                 update = 'LEVEL: ' + str(level)
                 oLevelText.setValue(update)
+                oLevelText.draw()
+                for z in range(len(fruitList)):
+                    fruitList[z].levelUp()
             # Check type of fruit
             fruit = fruitList[x].fruitType
             fruit = fruitType.index(fruit)
@@ -114,7 +114,6 @@ while True:
     # 10 - Draw the screen elements
     for x in range(len(fruitList)):
         fruitList[x].draw()
-    # oFruit.draw()   # tell each ball to draw itself
 
     oRestartButton.draw()
     oBasket.draw()

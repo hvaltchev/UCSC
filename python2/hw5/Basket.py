@@ -30,10 +30,10 @@ class Basket():
 
     def move(self, leftOrRight):
         # add code here to move the basket and restrict it to stay in the window
-        if leftOrRight == 'left' and self.x >= 0:
+        if leftOrRight == 'left' and self.x > 0 + self.halfWidth:
             self.x = self.x - self.width
 
-        if leftOrRight == 'right' and self.x + self.width <= self.windowWidth:
+        if leftOrRight == 'right' and self.x + self.width + self.halfWidth < self.windowWidth:
             self.x = self.x + self.width
 
         self.image.setLoc((self.x, self.y))
