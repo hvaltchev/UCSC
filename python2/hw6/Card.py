@@ -7,6 +7,11 @@ class Card():
     def __init__(self, window, rank, suit, value):
         # must add code here to save away parameters in instance variables
         # and create two Image objects, one for the current card, one for the backOfCard
+        self.window = window
+        self.rank = rank
+        self.suit = suit
+        self.value = value
+
         pass     # you can remove this line when you add your own
 
     # You can remove the print statement below
