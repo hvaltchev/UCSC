@@ -51,7 +51,7 @@ class Game():
         self.currentCardName, self.currentCardValue = self.getCardNameAndValue(self.cardNumber)
 
         self.messageText.setValue(
-            'Starting card is ' + self.currentCardName + '. Will the next card be higher or lower?')
+            'Starting card is ' + str(self.currentCardName) + '. Will the next card be higher or lower?')
 
     def getCardNameAndValue(self, index):
         oCard = self.cardList[index]

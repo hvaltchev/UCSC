@@ -16,21 +16,27 @@ class Card():
 
     def conceal(self):
         print('Must conceal the card here')
+        pass
 
     def setLoc(self, locTuple):
         print('Called setLoc method, passed in', locTuple)
+        pass
 
     def reveal(self):
         print('Must reveal card here')
+        pass
 
     def getName(self):
         print('Get the name of the card here')
+        pass
 
     def getValue(self):
         print('Get the value of the card here')
+        pass
 
     def draw(self):
         print('Draw the card here')
+        pass
 
     def getCardNameAndValue(self):
         print("Get the card name and value here")
