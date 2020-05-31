@@ -18,7 +18,6 @@ class Deck():
             for index, rank in enumerate(Deck.RANK_TUPLE):
                 oCard = Card(window, rank, suit, valuesTuple[index])
                 self.startingDeckList.append(oCard)
-
         self.shuffle()
 
     def shuffle(self):
