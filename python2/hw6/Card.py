@@ -22,6 +22,7 @@ class Card():
 
     def setLoc(self, locTuple):
         print('Called setLoc method, passed in', locTuple)
+
         pass
 
     def reveal(self):
@@ -38,6 +39,7 @@ class Card():
 
     def draw(self):
         print('Draw the card here')
+        self.cardImage.replace('images/' + self.getName() + '.png')
         self.cardImage.draw()
 
     def getCardNameAndValue(self):
