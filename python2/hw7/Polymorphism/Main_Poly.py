@@ -7,7 +7,10 @@ import sys
 import pygwidgets
 
 from Star import *
-
+from Frisbee import *
+from Square import *
+from Car import *
+from Dinosaur import *
 
 # 2 Define constants
 SCREEN_WIDTH = 640
