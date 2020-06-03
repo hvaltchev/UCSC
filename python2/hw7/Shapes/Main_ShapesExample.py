@@ -2,6 +2,7 @@ import pygame
 import sys
 from pygame.locals import *
 from Square import *
+from Rectangle import *
 from Circle import *
 from Triangle import *
 import pygwidgets
@@ -19,11 +20,13 @@ window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 clock = pygame.time.Clock()
 
 shapesList = []
-shapeTypesTuple = ('square', 'circle', 'triangle')
+shapeTypesTuple = ('square', 'rectangle', 'circle', 'triangle')
 for i in range(0, N_SHAPES):
     thisType = random.choice(shapeTypesTuple)
     if thisType == 'square':
         oShape = Square(window)
+    elif thisType == 'rectangle':
+        oShape = Rectangle(window)
     elif thisType == 'circle':
         oShape = Circle(window)
     else:  # must be triangle
