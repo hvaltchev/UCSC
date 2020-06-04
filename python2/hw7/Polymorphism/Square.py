@@ -3,7 +3,7 @@
 import pygame
 import pygwidgets
 
-class Frisbee():
+class Square():
     def __init__(self, window, loc):
         self.image = pygwidgets.Image(window, loc, 'images/frisbee.png')
 

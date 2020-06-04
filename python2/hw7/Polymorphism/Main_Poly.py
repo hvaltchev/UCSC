@@ -25,12 +25,16 @@ clock = pygame.time.Clock()
 
 # 4 - Load assets: images(s), sounds, etc.
 
-
 # 5 - Initialize variables
 oResetButton = pygwidgets.TextButton(window, (300, 420), 'Reset star')
-oStar = Star(window, (280, 200))
 
-myList = [oStar]
+oStar = Star(window, (280, 200))
+oFrisbee = Frisbee(window, (180, 200))
+oSquare = Square(window, (380, 200))
+oCar = Car(window, (280, 100))
+oDinosaur = Dinosaur(window, (280, 300))
+
+myList = [oStar, oFrisbee, oSquare, oCar, oDinosaur]
 
 # 6 - Loop forever
 while True:

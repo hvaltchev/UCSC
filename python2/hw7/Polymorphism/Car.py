@@ -3,9 +3,9 @@
 import pygame
 import pygwidgets
 
-class Frisbee():
+class Car():
     def __init__(self, window, loc):
-        self.image = pygwidgets.Image(window, loc, 'images/frisbee.png')
+        self.image = pygwidgets.Image(window, loc, 'images/car.png')
 
         self.rect = self.image.getRect()
         self.spinning = False
