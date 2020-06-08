@@ -30,7 +30,7 @@ oResetButton = pygwidgets.TextButton(window, (300, 420), 'Reset star')
 
 oStar = Star(window, (280, 200))
 oFrisbee = Frisbee(window, (180, 200))
-oSquare = Square(window, (380, 200))
+oSquare = Square(window, (280, 300))
 oCar = Car(window, (280, 100))
 oDinosaur = Dinosaur(window, (280, 300))
 
